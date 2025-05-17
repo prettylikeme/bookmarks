@@ -1,28 +1,23 @@
-import { defineConfig } from 'vitepress'
+import path from 'path';
+import { defineConfig } from 'vitepress';
+import viteConfig from './vite.config.mts';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "520 导航",
-  description: "520 导航工具",
+  title: '520 导航',
+  description: '520 导航工具',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: '主页', link: '/' },
+      { text: '文件夹', link: '/path' },
+      { text: '分类', link: '/category' },
+      { text: '标签', link: '/tag' },
     ],
 
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
-
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ]
-  }
-})
+    socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
+  },
+  vite: {
+    configFile: './.vitepress/vite.config.mts',
+  },
+});
