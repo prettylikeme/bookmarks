@@ -42,9 +42,12 @@ declare global {
     name: string;
     /** 子目录 */
     children?: Directory[];
+    /** 书签 */
+    bookmarks?: Bookmark[];
   }
 
-  type BookmarkPath = Map<string, BookmarkPath | Bookmark[]>;
+  type BookmarkFolder = { name: string; bookmarks: Bookmark[] };
+  type BookmarkPath = Map<string, BookmarkPath | BookmarkFolder>;
   type BookmarkTag = Map<string, Bookmark[]>;
   type BookmarkCategory = Map<string, Bookmark[]>;
 }

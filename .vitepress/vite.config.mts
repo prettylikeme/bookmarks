@@ -29,4 +29,7 @@ export default {
       '@': path.resolve('.vitepress'),
     },
   },
+  build: {
+    target: ['esnext'],
+  },
 } as UserConfig<DefaultTheme.Config>['vite'];

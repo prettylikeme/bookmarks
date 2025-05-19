@@ -9,12 +9,10 @@
 
 <script setup lang="ts">
 const { data } = defineProps<{
-  data: MaybeRef<BookmarkCategory>;
+  data: BookmarkCategory;
 }>();
 
-console.log(data);
-
-const categoryList = unref(data).keys().toArray();
+const categoryList = [...data.keys()];
 const activeCategory = shallowRef(categoryList[0]);
 
 const bookmarks = computed(() => {

@@ -1,8 +1,8 @@
 import JSON5 from 'json5';
 
-const dirTree: Directory = { name: '/' };
+const dirTree: Directory = { name: '根目录' };
 /** 路径映射 */
-const pathMap: BookmarkPath = new Map([['.', []]]);
+const pathMap: BookmarkPath = new Map([['.', { name: '根目录', bookmarks: [] }]]);
 /** 标签映射 */
 const tagMap: BookmarkTag = new Map();
 /** 分类映射 */
@@ -14,10 +14,15 @@ const getBookmarkData = async () => {
 
 const bookmarkData = await (async () => {
   let bookmarkData: BookmarkData;
-  const bookmarkDataStr = localStorage.getItem('bookmark-data');
+  let bookmarkDataStr: string | null = null;
+  if (typeof localStorage !== 'undefined') {
+    bookmarkDataStr = localStorage.getItem('bookmark-data');
+  }
   if (bookmarkDataStr === null) {
     bookmarkData = await getBookmarkData();
-    localStorage.setItem('bookmark-data', JSON5.stringify(bookmarkData));
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('bookmark-data', JSON5.stringify(bookmarkData));
+    }
   } else {
     bookmarkData = JSON5.parse(bookmarkDataStr);
   }
@@ -35,19 +40,24 @@ for (let item of bookmarkData.data) {
     let dirMap = pathMap;
     let currDir = dirTree;
     for (let dir of paths) {
+      if (dirMap.has(dir)) {
+        dirMap = dirMap.get(dir) as BookmarkPath;
+        continue;
+      }
+
+      dirMap.set(dir, new Map([['.', { name: dir, bookmarks: [] }]]));
+      const childMap = dirMap.get(dir) as BookmarkPath;
+      childMap.set('..', dirMap);
+      dirMap = childMap;
+
       let nextDir = currDir.children?.find((item) => item.name === dir);
       if (!nextDir) {
         nextDir = { name: dir };
         currDir.children = [...(currDir.children || []), nextDir];
       }
       currDir = nextDir;
-
-      if (!dirMap.has(dir)) {
-        dirMap.set(dir, new Map([['.', []]]));
-      }
-      dirMap = dirMap.get(dir) as BookmarkPath;
     }
-    const arr = dirMap.get('.') as Bookmark[];
+    const arr = (dirMap.get('.') as BookmarkFolder).bookmarks;
     arr.push(item);
   }
 
@@ -73,10 +83,5 @@ for (let item of bookmarkData.data) {
     categoryMap.get('未分类')!.push(item);
   }
 }
-
-console.log(dirTree);
-console.log(pathMap);
-console.log(tagMap);
-console.log(categoryMap);
 
 export { dirTree, pathMap, tagMap, categoryMap };
