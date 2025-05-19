@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   title: '520 导航',
   description: '520 导航工具',
+  outDir: '.vitepress/dist/docs',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
