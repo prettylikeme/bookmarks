@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: '520 导航',
+  base: '/bookmarks/',
   description: '520 导航工具',
   outDir: '.vitepress/dist/docs',
   themeConfig: {

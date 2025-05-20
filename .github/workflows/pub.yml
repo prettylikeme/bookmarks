@@ -91,7 +91,11 @@ jobs:
           GITHUB_REPO: github.com/prettylikeme/bookmarks
         # 将编译后的博客文件推送到指定仓库
         run: |
-          cd ./.vitepress/dist && git init && git add .
+          cd ./.vitepress/dist
+          git clone "https://$GITHUB_REPO" git_repo
+          rm git_repo/docs -rf
+          mv docs/ git_repo/docs/
+          cd git_repo
           git config user.name "prettylikeme"
           git config user.email "103903530@qq.com"
           git add .
