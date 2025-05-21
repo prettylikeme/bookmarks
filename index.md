@@ -3,6 +3,6 @@
 layout: home
 
 hero:
-  name: "520 导航"
+  name: "发里福笑导航"
 ---
 

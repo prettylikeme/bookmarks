@@ -8,7 +8,7 @@
 
 <script lang="ts" setup>
 import { VPHomeContent } from 'vitepress/theme';
-import { tagMap } from '@/utils/init';
+import { tagMap } from '@/scripts/init-data';
 </script>
 
-<style lang="scss" module></style>
+<style lang="scss" scoped></style>

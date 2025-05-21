@@ -2,7 +2,9 @@ import JSON5 from 'json5';
 
 const dirTree: Directory = { name: '根目录' };
 /** 路径映射 */
-const pathMap: BookmarkPath = new Map([['.', { name: '根目录', bookmarks: [] }]]);
+const pathMap: BookmarkPath = new Map([
+  ['.', { name: '根目录', bookmarks: [] }],
+]);
 /** 标签映射 */
 const tagMap: BookmarkTag = new Map();
 /** 分类映射 */

@@ -10,11 +10,21 @@ const { icon, name: title, desc, url: link } = props.data;
 </script>
 
 <template>
-  <a v-if="link" class="m-nav-link" :href="link" target="_blank" rel="noreferrer">
+  <a
+    v-if="link"
+    class="m-nav-link"
+    :href="link"
+    target="_blank"
+    rel="noreferrer"
+  >
     <article class="box">
       <div class="box-header">
         <div v-if="icon && typeof icon === 'string'" class="icon">
-          <img :src="withBase(icon)" :alt="title" onerror="this.parentElement.style.display='none'" />
+          <img
+            :src="withBase(icon)"
+            :alt="title"
+            onerror="this.parentElement.style.display='none'"
+          />
         </div>
         <h5 v-if="title" class="title">{{ title }}</h5>
       </div>

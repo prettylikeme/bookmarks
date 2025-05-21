@@ -16,7 +16,11 @@ export default {
       dirsScanOptions: {
         types: true,
       },
-      dirs: ['./.vitepress/components/**', './.vitepress/views/**', '.vitepress/theme/**'],
+      dirs: [
+        './.vitepress/components/**',
+        './.vitepress/views/**',
+        '.vitepress/theme/**',
+      ],
       dts: './auto-imports.d.ts',
     }),
     Components({
@@ -27,6 +31,13 @@ export default {
   resolve: {
     alias: {
       '@': path.resolve('.vitepress'),
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+      },
     },
   },
   build: {

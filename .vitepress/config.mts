@@ -2,9 +2,9 @@ import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: '520 导航',
+  title: '发里福笑导航',
   base: '/bookmarks/',
-  description: '520 导航工具',
+  description: '发里福笑导航站',
   outDir: '.vitepress/dist/docs',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

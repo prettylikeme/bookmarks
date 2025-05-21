@@ -6,7 +6,8 @@ import MVCategory from '@/views/MVCategory.vue';
 import MVPath from '@/views/MVPath.vue';
 import MVTag from '@/views/MVTag.vue';
 import './style.css';
-import '@/utils/init';
+import '@/scripts/init-data';
+import { enhanceApp } from '@/scripts/init-app';
 
 export default {
   extends: DefaultTheme,
@@ -35,7 +36,5 @@ export default {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
     });
   },
-  enhanceApp({ app, router, siteData }) {
-    // ...
-  },
+  enhanceApp: enhanceApp,
 } satisfies Theme;
