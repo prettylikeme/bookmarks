@@ -1,1 +1,0 @@
-import{_ as t,c as e,o as a}from"./chunks/framework.mbPvpQoW.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{"layout":"page","customLayout":"category"},"headers":[],"relativePath":"category.md","filePath":"category.md"}'),o={name:"category.md"};function r(c,s,n,p,_,d){return a(),e("div")}const f=t(o,[["render",r]]);export{m as __pageData,f as default};
