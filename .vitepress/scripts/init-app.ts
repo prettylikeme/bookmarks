@@ -14,7 +14,18 @@ if (typeof window === 'undefined') {
     rootEl?.addEventListener('contextmenu', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      showContextMenu(e);
+      showContextMenu(e, [
+        {
+          type: 'action',
+          title: '新增书签',
+          event: 'add-bookmark',
+        },
+        {
+          type: 'action',
+          title: '删除书签',
+          event: 'delete-bookmark',
+        },
+      ]);
     });
   };
 }

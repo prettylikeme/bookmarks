@@ -3,14 +3,18 @@ import MVContextMenu from './MVContextMenu.vue';
 
 let contextMenuEl: HTMLDivElement | null = null;
 
-function showContextMenu(event: MouseEvent) {
+function showContextMenu(event: MouseEvent, menu: MVContextMenuItem[]) {
   if (contextMenuEl) {
     hideContextMenu();
   }
 
   contextMenuEl = document.createElement('div');
 
-  const vNode = createVNode(MVContextMenu, { x: event.x, y: event.y });
+  const vNode = createVNode(MVContextMenu, {
+    x: event.x,
+    y: event.y,
+    actions: menu,
+  });
   vNode.appContext = getCurrentInstance()?.appContext || null;
 
   render(vNode, contextMenuEl);

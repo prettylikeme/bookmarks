@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress';
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: '发里福笑导航',
-  base: '/bookmarks/',
+  base: '/bookmark/',
   description: '发里福笑导航站',
   outDir: '.vitepress/dist/docs',
   themeConfig: {

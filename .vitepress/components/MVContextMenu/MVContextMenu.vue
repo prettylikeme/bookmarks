@@ -3,7 +3,7 @@
     class="mv-context-menu-wrapper"
     :style="{ left: x + 'px', top: y + 'px' }"
   >
-    <MVContextMenuItem type="123">123</MVContextMenuItem>
+    <MVContextMenuItem v-for="item in actions" :data="item"></MVContextMenuItem>
   </div>
 </template>
 
@@ -11,6 +11,7 @@
 defineProps<{
   x: number;
   y: number;
+  actions: MVContextMenuItem[];
 }>();
 </script>
 
