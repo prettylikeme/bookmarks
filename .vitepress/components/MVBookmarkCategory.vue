@@ -1,7 +1,13 @@
 <template>
   <!-- 分类列表 -->
   <div class="m-nav-links">
-    <div v-for="item in categoryList" :key="item" @click="activeCategory = item">{{ item }}</div>
+    <div
+      v-for="item in categoryList"
+      :key="item"
+      @click="activeCategory = item"
+    >
+      {{ item }}
+    </div>
   </div>
   <div class="m-nav-links">
     <!-- 书签 -->
@@ -10,15 +16,13 @@
 </template>
 
 <script setup lang="ts">
-const { data } = defineProps<{
-  data: BookmarkCategory;
-}>();
+import { categoryMap } from '@/scripts/init-data';
 
-const categoryList = [...data.keys()];
+const categoryList = [...categoryMap.keys()];
 const activeCategory = shallowRef(categoryList[0]);
 
 const bookmarks = computed(() => {
-  return unref(data).get(activeCategory.value) as Bookmark[];
+  return categoryMap.get(activeCategory.value) as Bookmark[];
 });
 </script>
 
@@ -34,7 +38,10 @@ const bookmarks = computed(() => {
   margin-top: var(--m-nav-gap);
 }
 
-@each $media, $size in (500px: 140px, 640px: 155px, 768px: 175px, 960px: 200px, 1440px: 240px) {
+@each $media,
+  $size
+    in (500px: 140px, 640px: 155px, 768px: 175px, 960px: 200px, 1440px: 240px)
+{
   @media (min-width: $media) {
     .m-nav-links {
       grid-template-columns: repeat(auto-fill, minmax($size, 1fr));

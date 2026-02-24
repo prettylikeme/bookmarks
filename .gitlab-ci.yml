@@ -3,7 +3,7 @@ image: node:lts
 create-pages:
   pages:
     # The folder that contains the files to be exposed at the Page URL
-    publish: .vitepress/dist/docs
+    publish: .vitepress/dist
   rules:
     # This ensures that only pushes to the default branch will trigger
     # a pages deploy
@@ -12,4 +12,4 @@ create-pages:
   before_script:
     - npm install
   script:
-    - npm run build
+    - npm run build -- --base=/bookmarks/

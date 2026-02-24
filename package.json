@@ -3,7 +3,6 @@
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",
-    "build:github": "vitepress build --base /bookmarks/",
     "preview": "vitepress preview"
   },
   "author": "npmyang",

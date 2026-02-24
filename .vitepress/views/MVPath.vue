@@ -1,7 +1,9 @@
 <template>
   <div class="display-flex">
     <VPHomeContent>
-      <MVBookmarkPath :data="dataMap" @go-dir="setDataMap($event)" />
+      <ClientOnly>
+        <MVBookmarkPath :data="dataMap" @go-dir="setDataMap($event)" />
+      </ClientOnly>
     </VPHomeContent>
   </div>
 </template>

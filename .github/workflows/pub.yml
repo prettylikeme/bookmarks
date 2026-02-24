@@ -7,7 +7,7 @@ name: Deploy Vitepress site to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
+    branches: ['master']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -21,7 +21,7 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 # Default to bash
@@ -56,7 +56,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '22'
           # cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       # - name: Setup Pages
@@ -83,21 +83,19 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
       - name: Build
-        run: ${{ steps.detect-package-manager.outputs.manager }} run build:github
+        run: ${{ steps.detect-package-manager.outputs.manager }} run build -- --base=/bookmarks/
 
-      - name: 发布到 Github Pages
-        env:
-          # Github 仓库
-          GITHUB_REPO: github.com/prettylikeme/bookmarks
-        # 将编译后的博客文件推送到指定仓库
-        run: |
-          cd ./.vitepress/dist
-          git clone "https://$GITHUB_REPO" git_repo
-          rm git_repo/docs -rf
-          mv docs/ git_repo/docs/
-          cd git_repo
-          git config user.name "prettylikeme"
-          git config user.email "103903530@qq.com"
-          git add .
-          git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
-          git push --force --quiet "https://${{ secrets.ACCESS_TOKEN }}@$GITHUB_REPO" master:master
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .vitepress/dist/docs # VitePress 默认的构建输出目录
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
