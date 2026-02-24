@@ -1,4 +1,0 @@
----
-layout: page
-customLayout: path
----
